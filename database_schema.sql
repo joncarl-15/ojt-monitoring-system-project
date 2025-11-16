@@ -13,6 +13,18 @@ CREATE TABLE users (
     is_active BOOLEAN DEFAULT TRUE
 );
 
+-- Create Companies Table (Company Information) - MUST BE BEFORE STUDENTS
+CREATE TABLE companies (
+    company_id INT PRIMARY KEY AUTO_INCREMENT,
+    company_name VARCHAR(150) NOT NULL,
+    address TEXT NOT NULL,
+    supervisor_name VARCHAR(100) NOT NULL,
+    contact_number VARCHAR(20) NOT NULL,
+    email VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
 -- Create Students Table (Student Profile Management)
 CREATE TABLE students (
     student_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -30,18 +42,6 @@ CREATE TABLE students (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (company_id) REFERENCES companies(company_id)
-);
-
--- Create Companies Table (Company Information)
-CREATE TABLE companies (
-    company_id INT PRIMARY KEY AUTO_INCREMENT,
-    company_name VARCHAR(150) NOT NULL,
-    address TEXT NOT NULL,
-    supervisor_name VARCHAR(100) NOT NULL,
-    contact_number VARCHAR(20) NOT NULL,
-    email VARCHAR(100),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- Create Daily Time Records Table (DTR)
